@@ -4,8 +4,7 @@ uint8_t rangePin = 5;
 uint8_t togglePin = 12;
 uint8_t calibratePin = 3;
 uint8_t buttonHold = 0;
-uint8_t cmMode = 1;
-uint8_t inchMode = 0;
+uint8_t Mode = 0;
 
 
 void setup() {
@@ -39,26 +38,24 @@ float cmConversion() {
 void loop() {
   if (digitalRead(togglePin) == HIGH && buttonHold == 0) {
     buttonHold = 1;
-    if (cmMode == LOW) {
-      cmMode = HIGH;
-      inchMode = LOW;
+    if (Mode == LOW) {
+      Mode = HIGH;
     }
-    if (inchMode == LOW) {
-      inchMode = HIGH;
-      cmMode = LOW;
+    if (Mode == HIGH) {
+      Mode = LOW;
     }
   }
   if (digitalRead(togglePin) == LOW) {
     buttonHold = 0;
   }
 
-  if (cmMode == HIGH) {
+  if (Mode == HIGH) {
     lcd.clear();
     lcd.print(cmConversion());
     lcd.setCursor(1, 1);
     delay(300);
   }
-  if (inchMode == HIGH) {
+  if (Mode == HIGH) {
     lcd.clear();
     lcd.print(inchConversion());
     lcd.setCursor(1, 1);
