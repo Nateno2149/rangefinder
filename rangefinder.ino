@@ -4,7 +4,7 @@ uint8_t rangePin = 5;
 uint8_t togglePin = 12;
 uint8_t calibratePin = 3;
 uint8_t buttonHold = 0;
-uint8_t Mode = 0;
+uint8_t Mode = LOW;
 
 
 void setup() {
@@ -45,7 +45,7 @@ void loop() {
       Mode = LOW;
     }
   }
-  if (digitalRead(togglePin) == LOW) {
+  if (digitalRead(togglePin) == LOW && buttonHold = 0) {
     buttonHold = 0;
   }
 
@@ -55,7 +55,7 @@ void loop() {
     lcd.setCursor(1, 1);
     delay(300);
   }
-  if (Mode == HIGH) {
+  if (Mode == LOW) {
     lcd.clear();
     lcd.print(inchConversion());
     lcd.setCursor(1, 1);
