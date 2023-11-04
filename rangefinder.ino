@@ -4,8 +4,9 @@ uint8_t rangePin = 5;
 uint8_t togglePin = 12;
 uint8_t calibratePin = 3;
 uint8_t buttonHold = 0;
-uint8_t Mode = LOW;
-
+uint8_t prevMode = LOW;
+uint8_t Mode;
+bool State = 0;
 
 void setup() {
   pinMode(togglePin, INPUT);
@@ -36,32 +37,34 @@ float cmConversion() {
 }
 
 void loop() {
-  if (digitalRead(togglePin) == HIGH && buttonHold == 0) {
-    buttonHold = 1;
-    if (Mode == LOW) {
-      Mode = HIGH;
-    }
+  Mode = digitalRead(togglePin);
+  if (Mode != prevMode) {
     if (Mode == HIGH) {
-      Mode = LOW;
+      State = !State;
     }
-  }
-  if (digitalRead(togglePin) == LOW && buttonHold = 0) {
-    buttonHold = 0;
+    prevMode = Mode;
   }
 
-  if (Mode == HIGH) {
+  if (State == HIGH) {
     lcd.clear();
     lcd.print(cmConversion());
     lcd.setCursor(1, 1);
     delay(300);
   }
-  if (Mode == LOW) {
+  if (State == LOW) {
     lcd.clear();
     lcd.print(inchConversion());
     lcd.setCursor(1, 1);
     delay(300);
   }
-
+  Serial.print("Mode = ");
+  Serial.println(Mode);
+    Serial.print("prevMode = ");
+  Serial.println(digitalRead(prevMode));
+  Serial.print("State = ");
+  Serial.println(digitalRead(State));
+  Serial.print("togglePin = ");
+  Serial.println(digitalRead(togglePin));
 }
 
 
