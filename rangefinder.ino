@@ -1,3 +1,7 @@
+/*
+Nice - good use of descriptive variable names and functions.
+*/
+
 #include "rgb_lcd.h"
 rgb_lcd lcd;
 uint8_t rangePin = 5;
@@ -45,6 +49,21 @@ void loop() {
     prevMode = Mode;
   }
 
+/* 
+  Since state can ONLY equal High or Low it makes more sense to use an if / else rather than two ifs.
+  e.g.
+
+  if(State == HIGH)
+  {
+      .....  Do the State is high stuff here
+  }
+  else
+  {  
+      ..... Do the State is low stuff here
+  }
+
+*/
+  
   if (State == HIGH) {
     lcd.clear();
     lcd.print(cmConversion());
