@@ -1,3 +1,5 @@
+// Good work!
+
 
 #include "rgb_lcd.h"
 rgb_lcd lcd;
@@ -57,7 +59,19 @@ void loop() {
       lcd.setCursor(1, 1);
       delay(300);
     }
-    if (rawValue == 0 || 2222) {
+    if (rawValue == 0 || 2222) {  // This should probably be if(rawValue == 0 || rawValue == 2222)  
+                                  // alternatively since we can only be here if rawValue equals, 0, 2047 or 2222
+                                  // you could just have done
+                                  // if (rawValue == 2047 || rawValue == 0 || rawValue == 2222) {
+                                  //   errorState = 1;
+                                  //   if(rawValue == 2047)
+                                  //   {
+                                  //        ....
+                                  //   }
+                                  //   else
+                                  //   {
+                                  //          .....
+                                  //   } ETC
       lcd.clear();
       lcd.print("ERROR: INVALID MEASUREMENT!");
       lcd.setCursor(1, 1);
